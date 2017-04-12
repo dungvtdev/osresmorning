@@ -37,7 +37,7 @@ observer = {
                'memory_working_set./',
                'rx_bytes./',
                'tx_bytes./',
-               'fs_limit./'
+               'fs_usage./'
                ],
 
     'to_endpoint': '192.168.122.76:8086',

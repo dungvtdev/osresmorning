@@ -86,7 +86,7 @@ def gather(query_data):
         mean = process_data(values)
         t = (values[0][0] + values[len(values) - 1][0]) * 1000000000 / 2
 
-        s = "{0} value={1} {2}".format(measurement, mean, str(t))
+        s = "{0},machine={3} value={1} {2}".format(measurement, mean, str(t), query_data['machine_id'])
         ls.append(s)
 
     data_to_write = ls
