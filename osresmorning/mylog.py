@@ -1,3 +1,4 @@
+import os
 import logging
 from . import config as base_config
 
@@ -20,6 +21,11 @@ def set_config(config):
     }
 
     level = getattr(logging, level_s)
+
+    # create folder file
+    directory = os.path.dirname(file)
+    if not os.path.exists(directory):
+        os.mkdir(directory)
 
     global handler
     handler = logging.FileHandler(file)

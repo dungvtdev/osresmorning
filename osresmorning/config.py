@@ -23,7 +23,6 @@ def apply_config(key, config):
     if key[:2] == '__' or type(base_config) == 'function':
         raise KeyError('Config with key %s not invalid' % key)
 
-    print(config.items)
     for k, it in config.items():
         base_config[k] = it
 

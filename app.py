@@ -4,10 +4,14 @@ from osresmorning import config as base_config
 # config
 base_config.apply_all_config(config)
 
+from osresmorning import mylog
+mylog.get_log(__name__).info('Start new session')
+
 import eventlet
 
 from osresmorning.v1 import handler as handler_v1
 from osresmorning.v1 import gather
+
 
 
 

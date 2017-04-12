@@ -47,7 +47,7 @@ class GatherBot(object):
             wait_time = self._interval - (time.time() - start_time)
             wait_time = wait_time if wait_time > 0 else 0
 
-            self._logger.debug('End gather, sleep %d', wait_time)
+            self._logger.debug('End gather, sleep %f', wait_time)
 
             time.sleep(wait_time)
 

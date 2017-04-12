@@ -1,4 +1,8 @@
 LOG = {
-    'file': 'app.log',
+    'file': 'log/app.log',
     'level': 'DEBUG'
+}
+
+V1_GATHER = {
+    'interval': 10
 }
