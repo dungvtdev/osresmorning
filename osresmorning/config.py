@@ -7,7 +7,7 @@ def apply_all_config(config_module):
         if k[:2] == '__' or type(getattr(config_module, k, None)) == 'function':
             continue
 
-        apply_config(k, getattr(config_module,k,None))
+        apply_config(k, getattr(config_module, k, None))
 
 
 def apply_config(key, config):
@@ -32,6 +32,15 @@ def get_config(key):
     return getattr(md, key, None)
 
 
+def load_module(caller, folder, name):
+    path = '.'.join(caller.split('.')[:-1]) if caller else ''
+    path = '{0}.{1}.{2}'.format(path, folder, name)
+
+    md = __import__(path, globals(), locals(), ['object'], -1)
+
+    return md
+
+
 APP = {
     'pool_size': 1000
 }
@@ -47,4 +56,6 @@ V1_HANDLER = {
 
 V1_GATHER = {
     'interval': 60,
+    'backwards_time': 30,
+    'driver': 'cadgather_driver'
 }
