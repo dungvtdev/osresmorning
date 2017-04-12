@@ -1,14 +1,9 @@
 import logging
-import types
-import sys
-
-default = {
-    'file': 'temp.log',
-    'level': 'INFO'
-}
+from . import config as base_config
 
 handler = None
 
+default = base_config.get_config('LOG')
 
 def set_config(config):
     global default
