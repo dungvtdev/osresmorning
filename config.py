@@ -4,5 +4,5 @@ LOG = {
 }
 
 V1_GATHER = {
-    'interval': 10
+    'interval': 60
 }

@@ -1,5 +1,7 @@
 import sys
 
+__all__ = ['apply_all_config', 'apply_config', 'get_config', 'load_module']
+
 
 def apply_all_config(config_module):
     keys = dir(config_module)
@@ -42,7 +44,7 @@ def load_module(caller, folder, name):
 
 
 APP = {
-    'pool_size': 1000
+    'pool_size': 20
 }
 
 LOG = {

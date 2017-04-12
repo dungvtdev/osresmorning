@@ -32,7 +32,7 @@ observer = {
     'endpoint': '192.168.1.226:8090',
     'user_id': 1,
     'machine_id':1,
-    'metric': 'cpu_usage_total./,rx_bytes',
+    'metric': ['cpu_usage_total./', 'rx_bytes',]
 }
 
 gather_bot.add_observer(observer)

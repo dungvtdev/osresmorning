@@ -1,8 +1,10 @@
 import falcon
 from osresmorning import config as base_config
 
+
 def set_config(config):
     pass
+
 
 app = application = falcon.API()
 
