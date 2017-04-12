@@ -1,0 +1,1 @@
+scp -r ./ dung@vaio:/home/dung/scptarget/osresmorning/

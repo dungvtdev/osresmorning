@@ -68,7 +68,7 @@ class GatherBot(object):
 
             time.sleep(wait_time)
 
-            self._time_now += time.time() - self._backwards_time
+            self._time_now = time.time() - self._backwards_time
 
     def start(self):
         self._time_now = time.time() - self._backwards_time

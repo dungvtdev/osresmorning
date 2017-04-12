@@ -4,7 +4,7 @@ from osresmorning import mylog
 
 __all__ = ['gather']
 
-logger = mylog.get_log("_Data Resources Driver (%s)" % __name__)
+logger = mylog.get_log("Cadgather Driver (%s)")
 
 
 def get_data(query_data):
@@ -37,13 +37,26 @@ def get_data(query_data):
 
 
 def process_data(values):
-    mean = sum(v[1] for v in values) / len(values)
+    values = [v[1] for v in values if v[1] is not None]
+    mean = sum(v for v in values) / len(values)
     return mean
 
 
-def write_data(query_data, data):
-    print(data)
+def write_data(query_data, data_list):
+    logger.debug("Write data {0} line, {1}".format(len(data_list), query_data))
 
+    if not data_list:
+        return
+
+    data_to_write = '\n'.join(data_list)
+
+    url = "http://{0}/write?db={1}".format(query_data['to_endpoint'], query_data['to_db'])
+    payload = data_to_write
+
+    rq = requests.post(url, data=payload)
+
+    print(rq.status_code)
+    print(data_to_write)
 
 def gather(query_data):
     try:
@@ -52,7 +65,6 @@ def gather(query_data):
         logger.error("Query data exception {0}, error: {1}".format(query_data, e.message))
         return
 
-    print(data)
     data = json.loads(data)
     data = data.get("data", None)
 
@@ -72,11 +84,11 @@ def gather(query_data):
                         % (it.get("container", None), query_data))
 
         mean = process_data(values)
-        t = (values[0][0] + values[len(values) - 1][0]) / 2.0
+        t = (values[0][0] + values[len(values) - 1][0]) * 1000000000 / 2
 
-        s = "{0} value={1} {2}".format(measurement, mean, t)
+        s = "{0} value={1} {2}".format(measurement, mean, str(t))
         ls.append(s)
 
-    data_to_write = '\n'.join(ls)
+    data_to_write = ls
 
     write_data(query_data, data_to_write)
